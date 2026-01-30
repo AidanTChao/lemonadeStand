@@ -16,13 +16,13 @@ cupsOfLemonade = 0
 val = 0
 
 def decision(): 
-    return int(input("What do you want to do? See Inventory - 1 | Go To Shop - 2 | Quit - 3 | Recipe - 4: "))
+    return int(input("What do you want to do? See Inventory - 1 | Go To Shop - 2 | Recipe - 3 | Quit - 4: "))
 def inventory():
     return "You have", str(lemons), "lemons,", str(cupsOfIce), "cups of ice,", str(gramsOfSugar), "grams of sugar, and $"+ str(money)
 def shopF(): 
     return int(input("What do you want to buy? Lemons - 1 | Cups Of Ice - 2 | Grams of Sugar - 3: "))
 
-while val != 3:
+while val != 4:
     val = decision()
     if val == 2:
         shop = shopF()
@@ -52,15 +52,18 @@ while val != 3:
             print("Sorry, you don't have enough money.")
     elif val == 1:
         print(*inventory())
-    elif decision() == 4:
+    elif val == 3:
         makeRecipeLemon = int(input("How many lemons do you want to put in your lemonade? "))
         makeRecipeSugar = int(input("How many grams of sugar do you want to put in your lemonade? "))
         makeRecipeIce = int(input("How many cups of ice do you want to put in your lemonade? "))
-        print("Your lemonade costs $"+ str(1.5 * makeRecipeLemon + 0.75 * makeRecipeIce + 0.05 * makeRecipeSugar), "per cup.")
-        cupsOfLemonade = int(input("How many cups of lemonade do you want to make? "))
-        cupsOfLemonadeClarify = input("Are you sure you want to make that many? It will cost", str(1.5 * makeRecipeLemon + 0.75 * makeRecipeIce + 0.05 * makeRecipeSugar * cupsOfLemonade))
-        lemons -= makeRecipeLemon * cupsOfLemonade
-        gramsOfSugar -= makeRecipeSugar * cupsOfLemonade
-        makeRecipeIce -= makeRecipeIce * cupsOfLemonade
+        if makeRecipeLemon >= lemons:
+            if makeRecipeSugar >= gramsOfSugar:
+                if makeRecipeIce >= cupsOfIce:
+                    cupsOfLemonadeClarify = input("Are you sure you want to make that many? It will cost $"+ str(1.5 * makeRecipeLemon + 0.75 * makeRecipeIce + 0.05 * makeRecipeSugar)+ " per cup. ")
+                    lemons -= makeRecipeLemon * cupsOfLemonade
+                    gramsOfSugar -= makeRecipeSugar * cupsOfLemonade
+                    makeRecipeIce -= makeRecipeIce * cupsOfLemonade
+        else:
+            print("Sorry, you don't have enough materials.")
 
 print(" ")
