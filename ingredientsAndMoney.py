@@ -1,7 +1,7 @@
 # Variables
 
 print(" ")
-
+from recipeAndPricing import ingredients
 money = 50.00
 lemons = 0
 cupsOfIce = 0
@@ -17,7 +17,7 @@ val = 0
 
 def decision(): 
     return int(input("What do you want to do? See Inventory - 1 | Go To Shop - 2 | Recipe - 3 | Quit - 4: "))
-def inventory():
+def inventory(): 
     return "You have", str(lemons), "lemons,", str(cupsOfIce), "cups of ice,", str(gramsOfSugar), "grams of sugar, and $"+ str(money)
 def shopF(): 
     return int(input("What do you want to buy? Lemons - 1 | Cups Of Ice - 2 | Grams of Sugar - 3: "))
@@ -53,6 +53,7 @@ while val != 4:
     elif val == 1:
         print(*inventory())
     elif val == 3:
+        print("Your current recipie is", str(ingredients))
         makeRecipeLemon = int(input("How many lemons do you want to put in your lemonade? "))
         makeRecipeSugar = int(input("How many grams of sugar do you want to put in your lemonade? "))
         makeRecipeIce = int(input("How many cups of ice do you want to put in your lemonade? "))
