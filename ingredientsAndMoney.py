@@ -1,7 +1,7 @@
-# Variables
+from recipeAndPricing import ingredients
 
 print(" ")
-from recipeAndPricing import ingredients
+
 money = 50.00
 lemons = 0
 cupsOfIce = 0
@@ -64,6 +64,9 @@ while val != 4:
                     lemons -= makeRecipeLemon * cupsOfLemonade
                     gramsOfSugar -= makeRecipeSugar * cupsOfLemonade
                     makeRecipeIce -= makeRecipeIce * cupsOfLemonade
+                    ingredients[lemons] + makeRecipeLemon
+                    ingredients[sugar] + makeRecipeSugar
+                    ingredients[ice] + makeRecipeIce
         else:
             print("Sorry, you don't have enough materials.")
 
