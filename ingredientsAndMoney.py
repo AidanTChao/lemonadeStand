@@ -1,11 +1,10 @@
-from recipeAndPricing import ingredients
 
 print(" ")
 
-money = 50.00
-lemons = 0
-cupsOfIce = 0
-gramsOfSugar = 0
+inventoryD = {'money': 50.00,
+'lemons': 0,
+'cupsOfIce': 0,
+'gramsOfSugar': 0}
 howManyLemons = 0
 howManyLemonsClarify = 0
 howManyIce = 0
@@ -14,11 +13,14 @@ howManySugar = 0
 howManySugarClarify = 0
 cupsOfLemonade = 0
 val = 0
+recipe = {'lemonRecipe': 0,
+          'sugarRecipe': 0,
+          'iceRecipe': 0}
 
 def decision(): 
     return int(input("What do you want to do? See Inventory - 1 | Go To Shop - 2 | Recipe - 3 | Quit - 4: "))
 def inventory(): 
-    return "You have", str(lemons), "lemons,", str(cupsOfIce), "cups of ice,", str(gramsOfSugar), "grams of sugar, and $"+ str(money)
+    return "You have", str(inventoryD['lemons']), "lemons,", str(inventoryD['cupsOfIce']), "cups of ice,", str(inventoryD['gramsOfSugar']), "grams of sugar, and $"+ str(inventoryD['money'])
 def shopF(): 
     return int(input("What do you want to buy? Lemons - 1 | Cups Of Ice - 2 | Grams of Sugar - 3: "))
 
@@ -28,45 +30,45 @@ while val != 4:
         shop = shopF()
         if shop == 1:
             howManyLemons = int(input("How many lemons do you want to buy? "))
-            if howManyLemons <= money:
+            if howManyLemons <= inventoryD['money']:
                 howManyLemonsClarify = input("Are you sure you want to buy that many? It will cost $"+ str(howManyLemons * 1.5)+ ". ")
                 if howManyLemonsClarify == "yes":
-                    lemons += howManyLemons
-                    money -= howManyLemons
+                    inventoryD['lemons'] += howManyLemons
+                    inventoryD['money'] -= howManyLemons * 1.5
                     
         elif shop == 2:
             howManyIce = int(input("How many cups of ice do you want to buy? "))
-            if howManyIce <= money:
+            if howManyIce <= inventoryD['money']:
                 howManyIceClarify = input("Are you sure you want to buy that many? It will cost $"+ str(howManyIce * 0.75)+ ". ")
                 if howManyIceClarify == "yes":
-                    cupsOfIce += howManyIce
-                    money -= howManyIce
+                    inventoryD['cupsOfIce'] += howManyIce
+                    inventoryD['money'] -= howManyIce * 0.75
         elif shop == 3:
             howManySugar = int(input("How many grams of sugar do you want to buy? "))
-            if howManySugar <= money:
+            if howManySugar <= inventoryD['money']:
                 howManySugarClarify = input("Are you sure you want to buy that many? It will cost $"+ str(howManySugar * 0.05)+ ". ")
                 if howManySugarClarify == "yes":
-                    gramsOfSugar += howManySugar
-                    money -= howManySugar
+                    inventoryD['gramsOfSugar'] += howManySugar
+                    inventoryD['money'] -= howManySugar * 0.05
         else:
             print("Sorry, you don't have enough money.")
     elif val == 1:
         print(*inventory())
     elif val == 3:
-        print("Your current recipie is", str(ingredients))
+        print("Your current recipie is", str(recipe))
         makeRecipeLemon = int(input("How many lemons do you want to put in your lemonade? "))
         makeRecipeSugar = int(input("How many grams of sugar do you want to put in your lemonade? "))
         makeRecipeIce = int(input("How many cups of ice do you want to put in your lemonade? "))
-        if makeRecipeLemon >= lemons:
-            if makeRecipeSugar >= gramsOfSugar:
-                if makeRecipeIce >= cupsOfIce:
+        if makeRecipeLemon >= inventoryD['lemons']:
+            if makeRecipeSugar >= inventoryD['gramsOfSugar']:
+                if makeRecipeIce >= inventoryD['cupsOfIce']:
                     cupsOfLemonadeClarify = input("Are you sure you want to make that many? It will cost $"+ str(1.5 * makeRecipeLemon + 0.75 * makeRecipeIce + 0.05 * makeRecipeSugar)+ " per cup. ")
-                    lemons -= makeRecipeLemon * cupsOfLemonade
-                    gramsOfSugar -= makeRecipeSugar * cupsOfLemonade
-                    makeRecipeIce -= makeRecipeIce * cupsOfLemonade
-                    ingredients[lemons] + makeRecipeLemon
-                    ingredients[sugar] + makeRecipeSugar
-                    ingredients[ice] + makeRecipeIce
+                    inventoryD['lemons'] -= makeRecipeLemon * cupsOfLemonade
+                    inventoryD['gramsOfSugar'] -= makeRecipeSugar * cupsOfLemonade
+                    inventoryD['makeRecipeIce'] -= makeRecipeIce * cupsOfLemonade
+                    recipe['lemons'] + makeRecipeLemon
+                    recipe['sugar'] + makeRecipeSugar
+                    recipe['ice'] + makeRecipeIce
         else:
             print("Sorry, you don't have enough materials.")
 
