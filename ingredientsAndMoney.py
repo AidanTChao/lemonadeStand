@@ -18,7 +18,7 @@ recipe = {'lemonRecipe': 0,
           'iceRecipe': 0}
 
 def decision(): 
-    return int(input("What do you want to do? See Inventory - 1 | Go To Shop - 2 | Recipe - 3 | Quit - 4: "))
+    return int(input("What do you want to do? See Inventory - 1 | Go To Shop - 2 | Edit Recipe - 3 | Quit - 4: "))
 def inventory(): 
     return "You have", str(inventoryD['lemons']), "lemons,", str(inventoryD['cupsOfIce']), "cups of ice,", str(inventoryD['gramsOfSugar']), "grams of sugar, and $"+ str(inventoryD['money'])
 def shopF(): 
@@ -56,6 +56,9 @@ while val != 4:
         print(*inventory())
     elif val == 3:
         print("Your current recipie is", str(recipe))
+        recipe = {'lemonRecipe': 0,
+                  'sugarRecipe': 0,
+                  'iceRecipe': 0}
         makeRecipeLemon = int(input("How many lemons do you want to put in your lemonade? "))
         makeRecipeSugar = int(input("How many grams of sugar do you want to put in your lemonade? "))
         makeRecipeIce = int(input("How many cups of ice do you want to put in your lemonade? "))
@@ -65,10 +68,10 @@ while val != 4:
                     cupsOfLemonadeClarify = input("Are you sure you want to make that many? It will cost $"+ str(1.5 * makeRecipeLemon + 0.75 * makeRecipeIce + 0.05 * makeRecipeSugar)+ " per cup. ")
                     inventoryD['lemons'] -= makeRecipeLemon * cupsOfLemonade
                     inventoryD['gramsOfSugar'] -= makeRecipeSugar * cupsOfLemonade
-                    inventoryD['makeRecipeIce'] -= makeRecipeIce * cupsOfLemonade
-                    recipe['lemons'] + makeRecipeLemon
-                    recipe['sugar'] + makeRecipeSugar
-                    recipe['ice'] + makeRecipeIce
+                    inventoryD['cupsOfIce'] -= makeRecipeIce * cupsOfLemonade
+                    recipe['lemonRecipe'] += makeRecipeLemon
+                    recipe['sugarRecipe'] += makeRecipeSugar
+                    recipe['iceRecipe'] += makeRecipeIce
         else:
             print("Sorry, you don't have enough materials.")
 
